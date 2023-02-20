@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:moovbe/Screens/Home/home.dart';
 import 'package:moovbe/constant/constant.dart';
 
 import 'Widgets/customtextformfield.dart';
@@ -55,8 +56,8 @@ class LoginPage extends StatelessWidget {
         body: Column(children: [
           height20,
           height20,
-          CustomTextFormField(),
-          CustomTextFormField(),
+          const CustomTextFormField(hintText: 'Enter Username',),
+          const CustomTextFormField(hintText: 'Enter Password',),
         ]),
         bottomSheet: Container(
           color: Colors.white,
@@ -70,7 +71,7 @@ class LoginPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const LoginPage()));
+                        builder: (context) => const HomePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -86,6 +87,7 @@ class LoginPage extends StatelessWidget {
               )),
             ],
           ),
-        ));
+        ),
+        );
   }
 }

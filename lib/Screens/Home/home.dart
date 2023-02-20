@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                   return height20;
                 },
                 separatorBuilder: (context, index) {
-                  return const BusList();
+                  return  BusList(title: 'KSRTC', subtitle:  'Swift Scania P-series', buttontext: 'Manage',childWidget: Image.asset('assets/images/white bus.png'),);
                 },
                 itemCount: 21),
           )

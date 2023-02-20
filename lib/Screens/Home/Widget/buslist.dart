@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:moovbe/Screens/Home/BusDetails/three_seat.dart';
 import '../../../constant/constant.dart';
 
 class BusList extends StatelessWidget {
   const BusList({
-    Key? key,
+    Key? key, required this.title, required this.subtitle, required this.buttontext, required this.childWidget,
   }) : super(key: key);
+
+  final String title;
+  final String subtitle;
+  final String buttontext;
+  final Widget childWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +34,19 @@ class BusList extends StatelessWidget {
           color: greyClr,
           width: 65,
           height: 80,
-          child: Image.asset('assets/images/white bus.png'),
+          child: childWidget,
         ),
-        title: Text('KSRTC'),
-        subtitle: Text('Swift Scania P-series', style: TextStyle(fontSize: 13, color: blackClr),),
+        title: Text(title),
+        subtitle: Text('Licn no: $subtitle', style: TextStyle(fontSize: 13, color: blackClr),),
         trailing: Padding(
           padding: const EdgeInsets.only(right: 20),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ThreeSeatBus()));
+            },
             style: ElevatedButton.styleFrom(
                 backgroundColor: mainClr, elevation: 0),
-            child:  const Text('Manage', style: TextStyle(fontSize: 10),),
+            child:   Text(buttontext, style: const TextStyle(fontSize: 10),),
           ),
         ),
       ),
