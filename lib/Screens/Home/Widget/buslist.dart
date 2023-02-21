@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moovbe/Screens/Home/BusDetails/three_seat.dart';
+import 'package:moovbe/Services/bus_service.dart';
 import '../../../constant/constant.dart';
 
 class BusList extends StatelessWidget {
@@ -41,9 +42,7 @@ class BusList extends StatelessWidget {
         trailing: Padding(
           padding: const EdgeInsets.only(right: 20),
           child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ThreeSeatBus()));
-            },
+            onPressed: () {            },
             style: ElevatedButton.styleFrom(
                 backgroundColor: mainClr, elevation: 0),
             child:   Text(buttontext, style: const TextStyle(fontSize: 10),),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moovbe/Screens/Home/DriverList/driverlist.dart';
 import 'package:moovbe/constant/constant.dart';
+import 'BusDetails/three_seat.dart';
 import 'Widget/homeappbar.dart';
 import 'Widget/homecontainer.dart';
 import 'Widget/buslist.dart';
@@ -28,6 +30,7 @@ class HomePage extends StatelessWidget {
                 color: mainClr,
                 image: 'assets/images/bus.png',
                 leftPosition: 40,
+                nextPage: ThreeSeatBus(),
               ),
               HomeContainer(
                 width: width,
@@ -36,6 +39,7 @@ class HomePage extends StatelessWidget {
                 color: blackClr,
                 image: 'assets/images/driver.jpeg',
                 leftPosition: 50,
+                nextPage: DriverList()
               ),
             ],
           ),

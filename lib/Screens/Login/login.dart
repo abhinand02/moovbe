@@ -1,12 +1,17 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:moovbe/Screens/Home/home.dart';
+import 'package:moovbe/Services/bus_service.dart';
 import 'package:moovbe/constant/constant.dart';
-
 import 'Widgets/customtextformfield.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+   LoginPage({super.key});
+
+  final formkey1 = GlobalKey<FormState>();
+  final formkey2 = GlobalKey<FormState>();
+
+  final TextEditingController nameController =TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +61,8 @@ class LoginPage extends StatelessWidget {
         body: Column(children: [
           height20,
           height20,
-          const CustomTextFormField(hintText: 'Enter Username',),
-          const CustomTextFormField(hintText: 'Enter Password',),
+           CustomTextFormField(hintText: 'Enter Username', formkey: formkey1, controller: nameController,),
+           CustomTextFormField(hintText: 'Enter Password',formkey: formkey2,controller: passwordController,),
         ]),
         bottomSheet: Container(
           color: Colors.white,
@@ -70,8 +75,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const HomePage()));
+                    BusServices.loginMethod(username: nameController.text, password: passwordController.text, context: context);
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

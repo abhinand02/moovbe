@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key? key, required this.hintText,
+    Key? key, required this.hintText, required this.formkey, required this.controller,
   }) : super(key: key);
 
   final String hintText;
+  final GlobalKey formkey;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formkey,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: TextFormField(
+          controller: controller,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
             isDense: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moovbe/Services/bus_service.dart';
 import '../../constant/constant.dart';
 import '../Login/login.dart';
 
@@ -26,7 +27,7 @@ class SplashScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
+                    MaterialPageRoute(builder: (context) =>  LoginPage()));
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(14),

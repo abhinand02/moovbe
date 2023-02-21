@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moovbe/Screens/Home/DriverList/add_driver.dart';
 import 'package:moovbe/Screens/Home/Widget/buslist.dart';
+import 'package:moovbe/Services/bus_service.dart';
 import 'package:moovbe/Widgets/common_appbar.dart';
 import 'package:moovbe/constant/constant.dart';
+import '../../../Application/bloc/driver_list_bloc.dart';
 
 class DriverList extends StatelessWidget {
-  const DriverList({super.key});
+   DriverList({super.key,});
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,24 +21,41 @@ class DriverList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             height20,
-            Text('21 Drivers Found'),
+            BlocBuilder<DriverListBloc, DriverListState>(
+              builder: (context, state) {
+                var length;
+                if (state.driverList == null) {
+                  return  Text('${0} Drivers Found');
+                }else{
+                  return Text('${state.driverList!.driverList.length} Drivers Found');
+                }
+                // return Text('${0} Drivers Found');
+              },
+            ),
             height10,
             Expanded(
-              child: ListView.separated(
-                  itemBuilder: (context, index) => height10,
-                  separatorBuilder: (context, index) {
-                    return const BusList(
-                      title: 'Rohit sharma',
-                      subtitle: 'PJ5151961616',
-                      buttontext: 'Delete',
-                      childWidget: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/driver.jpeg'),
-                      ),
-                    );
-                    ;
-                  },
-                  itemCount: 21),
+              child: BlocBuilder<DriverListBloc, DriverListState>(
+                builder: (context, state) {
+                  if (state.driverList == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return ListView.separated(
+                      itemBuilder: (context, index) => height10,
+                      separatorBuilder: (context, index) {
+                        final data = state.driverList!.driverList[index];
+                        return BusList(
+                          title: data.name,
+                          subtitle: data.licenseNo,
+                          buttontext: 'Delete',
+                          childWidget: CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/images/driver.jpeg'),
+                          ),
+                        );
+                      },
+                      itemCount: state.driverList!.driverList.length);
+                },
+              ),
             )
           ],
         ),
@@ -48,8 +69,8 @@ class DriverList extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const AddDriver()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => AddDriver()));
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
